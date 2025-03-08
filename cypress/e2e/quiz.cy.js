@@ -8,11 +8,36 @@ describe('Quiz Component', () => {
       cy.visit('/');
     });
 
-    it('should GET a random word with masked letters on page load and render the masked word to the page', () => {
+    it('should display the start button when the page loads', () => {
       // Wait for the API call to complete
-      cy.wait('@getRandomWord').its('response.statusCode').should('eq', 200);
-
-      // Check if the masked word is rendered on the page
-    //   cy.get('[data-cy="masked-word"]').should('contain', mockState.maskedWord);
+      cy.get('button#Start').should('be.visible').and('contain', 'Start Quiz');
+      
     });
+
+    it('should start the quiz when the button is clicked', () => {
+
+      cy.get('button#Start').click();
+      cy.get('.questions').should('exist');
+      cy.get('.answers').should('have.length.greaterThan', 0);
+    });
+
+    it('should allow the user to answer the question', () => {
+
+      cy.get('button#start').click();
+      cy.get('.answers button').first().click();
+      cy.get('.questions').should('exist');
+      cy.get('.answers').should('have.length.greaterThan', 0);
+    });
+
+    it('should show the result after answering all questions', () => {
+      // Start the quiz
+      cy.get('button#start').click();
+      // Answer all questions 
+      cy.get('.answers button').each(($btn) => {
+        cy.wrap($btn).click();
+      });
+      // Verify the final result screen shows after all questions have been answered
+      cy.get('.result').should('be.visible');
+    });
+  
   });
