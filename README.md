@@ -34,7 +34,7 @@ npm install
 
 Ensure Cypress is installed using ``` npm install cypress```
 
-4. Start the server:
+4. Start the server in one integrated terminal:
 
 ```
 npm run build
@@ -42,7 +42,13 @@ npm run build
 npm run start:dev
 ```
 
-Your website should now be running locally.
+5. Run Cypress in a second integrated terminal:
+
+```
+npm run cypress
+```
+
+Your site should now be running locally and you should see Cypress appear.
 
 
 ## Usage 
