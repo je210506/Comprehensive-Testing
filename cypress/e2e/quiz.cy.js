@@ -14,8 +14,9 @@ describe('Quiz Component', () => {
       }
     ).as("getRandomQuestion") 
     
-    cy.visit('/')
-    })
+    cy.visit('/');
+    cy.wait("@getRandomQuestion");
+    });
 
     it('should display the start button when the page loads', () => {
       // Wait for the API call to complete
@@ -45,7 +46,7 @@ describe('Quiz Component', () => {
     it("should Restart the quiz", () => {
       cy.get("button").contains("Start Quiz").click();
       for (let i=0; i<20; i++) {
-        cy.get("button").contains("1").click()
+        cy.get("button").contains("1").click().wait()
       }
       cy.get("button").click();
       cy.get(".card").should("be.visible");
